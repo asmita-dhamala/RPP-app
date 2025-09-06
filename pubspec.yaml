@@ -1,0 +1,108 @@
+name: raparva_app
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.7.2 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_localizations:
+    sdk: flutter
+
+  # Core
+  intl: 0.19.0
+
+  # UI & Audio
+  animated_text_kit: ^4.2.2
+  audioplayers: ^5.2.1
+  cupertino_icons: ^1.0.8
+  flutter_arc_text: ^0.6.0
+  flutter_spinkit: ^5.2.0
+  flutter_swiper_view: ^1.1.6
+  google_fonts: ^6.1.0
+  lottie: ^2.7.0
+
+  # Device Preview Tools (Compatible with Dart 3.7.2)
+  device_frame_plus: ^1.4.0
+  device_preview_plus: ^1.2.0
+
+  # Dropdown UI
+  dropdown_search: ^5.0.3
+
+  # Form Validation
+  form_field_validator: ^1.1.0
+
+  # Localization
+  easy_localization: ^3.0.3
+
+  # Local Database
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+
+  # Networking
+  dio: ^5.4.2
+  http: ^1.1.0
+  logger: ^2.0.2
+
+  # OTP & Phone Fields
+  intl_phone_field: ^3.2.0
+  sms_autofill: ^2.3.0
+
+  # Permissions
+  permission_handler: ^11.3.1
+
+  # State Management
+  flutter_riverpod: ^2.3.6
+
+  # Storage
+  flutter_secure_storage: ^9.0.0
+  shared_preferences: ^2.2.2
+
+  # Toasts & Dialogs
+  awesome_dialog: ^3.1.0
+
+  # URL Handling
+  url_launcher: ^6.2.6
+
+  # App Info (compatible version)
+  package_info_plus: ^5.0.0
+
+  # Connectivity
+  connectivity_plus: ^6.0.1
+
+  font_awesome_flutter: ^10.7.0
+  video_player: ^2.10.0
+  youtube_player_flutter: ^9.0.4
+
+  share_plus: ^7.2.1
+  flutter_html: ^3.0.0
+  webview_flutter: ^4.0.7
+  flutter_widget_from_html: ^0.16.0
+  photo_view: ^0.14.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/lang/
+    - assets/audio/
+    - assets/fonts/
+    - assets/data/
+    - assets/videos/
+
+
+  # fonts:
+  #   - family: NepaliFont
+  #     fonts:
+  #       - asset: assets/fonts/Kalimati.ttf
