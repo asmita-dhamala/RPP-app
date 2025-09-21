@@ -27,6 +27,8 @@ class ListNewsBlockModel {
       isContainer: json['is_container'] ?? false,
     );
   }
+
+  // bool get isEmpty => null;
 }
 
 class ListNewsModel {

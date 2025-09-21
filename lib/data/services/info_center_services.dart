@@ -1,60 +1,46 @@
-// import 'package:raparva_app/core/constants/api_constants.dart';
-// import 'package:raparva_app/core/utils/api_util.dart';
-// import 'package:raparva_app/data/models/info_center_model.dart';
-
-// class InfoCenterService {
-//   static Future<InfoCenterModel?> fetchInfoCenter() async {
-//     try {
-//       final response = await ApiUtil.get(ApiConstants.homePage);
-
-//       final contentList = response['content'] as List<dynamic>? ?? [];
-
-//       final infoBlock = contentList.firstWhere(
-//         (item) =>
-//             item['type'] == 'box_featured' &&
-//             item['name'] == 'Box Featured', // You can adjust condition as needed
-//         orElse: () => null,
-//       );
-
-//       if (infoBlock != null) {
-//         return InfoCenterModel.fromJson(infoBlock);
-//       }
-//       return null;
-//     } catch (e) {
-//       throw Exception('Failed to load InfoCenter: $e');
-//     }
-//   }
-// }
 
 
-
-
-
-import 'package:raparva_app/core/constants/api_constants.dart';
-import 'package:raparva_app/core/utils/api_util.dart';
-import 'package:raparva_app/data/models/info_center_model.dart';
+import '../../core/constants/api_constants.dart';
+import '../../core/utils/api_util.dart';
+import '../models/info_center_model.dart';
 
 class InfoCenterService {
   static Future<InfoCenterModel?> fetchInfoCenter() async {
     try {
-      final response = await ApiUtil.get(ApiConstants.homePage); 
+      final rawResponse = await ApiUtil.get(ApiConstants.homePage, useRawUrl: true);
 
-      final List<dynamic> contentList = response['content'] ?? [];
+      // Safely cast response to Map<String, dynamic>
+      if (rawResponse == null || rawResponse is! Map<String, dynamic>) {
+        print('NewsService: Invalid API response format');
+        return null;
+      }
+      final Map<String, dynamic> data = rawResponse;
+      // response["type"] is a list
+      if (data['data'] is List) {
+        // Cast to List<Map<String, dynamic>> safely
+        final List<Map<String, dynamic>> blocks =
+        (data['data'] as List).cast<Map<String, dynamic>>();
 
-      final infoBlock = contentList.firstWhere(
-        (item) =>
-            item is Map<String, dynamic> &&
-            item['type'] == 'box_featured' &&
-            item['name'] == 'Box Featured', // Adjust this as needed
-        orElse: () => null,
-      );
+        // Find the first block with type 'list_news'
+        final infoBlock = blocks.firstWhere(
+              (element) => (element['type']?.toString().toLowerCase() == 'box_featured'),
+          orElse: () => {},
+        );
 
-      if (infoBlock != null && infoBlock is Map<String, dynamic>) {
-        return InfoCenterModel.fromJson(infoBlock);
+        // Check if a non-empty block is found
+        if (infoBlock.isNotEmpty) {
+          return InfoCenterModel.fromJson(infoBlock);
+        } else {
+          print('InfoCenterService: No InfoCenter block found');
+        }
+      }
+      else {
+        print('InfoCenterService: "data" key missing or not a list');
       }
 
+      print('⚠️ InfoBlock not found');
       return null;
-    } catch (e, stack) {
+    } catch (e) {
       print('❌ InfoCenterService.fetchInfoCenter error: $e');
       return null;
     }

@@ -65,6 +65,27 @@ class InfoCenterItem {
       desc: json['desc'] ?? '',
     );
   }
+
+  // get type => null;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
